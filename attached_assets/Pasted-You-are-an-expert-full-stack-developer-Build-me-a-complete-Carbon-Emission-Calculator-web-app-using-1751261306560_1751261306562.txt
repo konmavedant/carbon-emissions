@@ -1,0 +1,64 @@
+You are an expert full-stack developer. Build me a complete Carbon Emission Calculator web app using Python and Streamlit, with the following requirements:
+
+1. Project Structure & Setup
+   • Create a new Replit project with a virtual environment
+   • Include a `requirements.txt` listing all dependencies:
+     – streamlit
+     – pandas
+     – numpy
+     – scikit-learn
+     – joblib
+     – transformers (or another LLM library of your choice)
+     – matplotlib (optional, for charts)
+     – any other necessary packages
+   • Organize code into modules:
+     – `emissions_calculator.py` for all GHG Protocol–based calculation functions
+     – `ml_models.py` for AI/ML modeling (prediction, clustering, recommendations)
+     – `app.py` for the Streamlit UI
+     – `utils.py` for shared helper functions
+
+2. GHG Protocol–Based Calculations
+   • Implement Scope 1, 2, and optionally 3 calculators combining:
+     – Fuel consumption (vehicles, generators)
+     – Electricity use (kWh × country-specific emission factor)
+     – Purchased goods & services, business travel, waste (if you choose Scope 3)
+   • Use the latest emission factors from the GHG Protocol (hard-code a small example table or fetch from an open API)
+   • Functions should accept user inputs (quantities, units) and return CO₂e in kilograms
+
+3. AI/ML Features
+   a. Prediction
+      – Train a regression model (e.g., Linear Regression or Random Forest) on synthetic or sample historical emissions data
+      – Given past usage data, forecast next month’s emissions
+   b. Clustering
+      – Apply K-Means clustering to group users into “low”, “medium”, and “high” emitters based on their input profiles
+   c. Recommendations
+      – Use an LLM (via Hugging Face Transformers) or a simple rule-based engine to generate tailored reduction tips, e.g.:  
+        “Switching to LED lights can cut your lighting emissions by 50%.”  
+      – The prompt template for the LLM should incorporate the user’s calculated total and cluster label
+
+4. Streamlit UI (`app.py`)
+   • Sidebar inputs for all required data (fuel use, electricity, travel, etc.)
+   • “Calculate Emissions” button that:
+     – Calls your GHG functions
+     – Displays summary metrics (Scope 1, Scope 2, total CO₂e)
+     – Shows a line chart of past vs. predicted future emissions
+     – Displays the user’s cluster and a text recommendation from your ML/LLM module
+   • After results, render two side-by-side buttons:
+     [🌱 Register Project on Carbon Offset Registry](https://carbonica-ledger.netlify.app/)  
+     [📊 Add Project to Carbon Dashboard](https://karbon-compass.netlify.app/)
+   • Ensure links open in a new tab
+
+5. Persisting & Loading Models
+   • Use `joblib` to save trained ML models to disk
+   • On startup, load these models so predictions and clustering work instantly
+
+6. Documentation & Testing
+   • Provide inline docstrings for every function
+   • Include a `README.md` explaining how to run, test, and extend the app
+   • Write at least one simple unit test for each calculation function
+
+7. Deployment
+   • Configure Streamlit’s `streamlit.toml` for easy Replit deployment
+   • Ensure the app starts on port 3000 (or Replit’s default)
+
+Please generate all code files, configuration, and a brief README. Structure your response so I can copy-paste each file directly into Replit. Start with `requirements.txt`, then your Python modules, then `app.py`, and finally the `README.md`. Thank you!
