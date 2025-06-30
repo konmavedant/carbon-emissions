@@ -216,14 +216,26 @@ def display_results():
     with col1:
         st.subheader("📊 Emissions Breakdown")
         
-        # Pie chart
-        labels = ['Scope 1', 'Scope 2', 'Business Activities']
-        values = [st.session_state.scope1, st.session_state.scope2, st.session_state.business]
+        # Pie chart - filter out zero values
+        data_dict = {
+            'Scope 1': st.session_state.scope1,
+            'Scope 2': st.session_state.scope2,
+            'Business Activities': st.session_state.business
+        }
         
-        fig, ax = plt.subplots(figsize=(8, 6))
-        ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
-        ax.set_title('Carbon Emissions by Category')
-        st.pyplot(fig)
+        # Filter out zero or very small values
+        filtered_data = {k: v for k, v in data_dict.items() if v > 0.01}
+        
+        if filtered_data:
+            labels = list(filtered_data.keys())
+            values = list(filtered_data.values())
+            
+            fig, ax = plt.subplots(figsize=(8, 6))
+            ax.pie(values, labels=labels, autopct='%1.1f%%', startangle=90)
+            ax.set_title('Carbon Emissions by Category')
+            st.pyplot(fig)
+        else:
+            st.write("No emission data to display in chart")
     
     with col2:
         st.subheader("📈 Emissions Forecast")
